@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Guide – GE 5 Purposive Communication</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root[data-theme="dark"] {
+    --bg: #0d1117; --bg2: #161b22; --card: #1c2333; --card-hover: #212840;
+    --border: rgba(255,255,255,0.07); --text: #e6edf3; --text-muted: #8b949e; --text-sub: #c9d1d9;
+    --gold: #f0c060; --gold-dim: rgba(240,192,96,0.15);
+    --teal: #39d2a6; --teal-dim: rgba(57,210,166,0.15);
+    --red: #f85149; --red-dim: rgba(248,81,73,0.15);
+    --purple: #bc8cff; --purple-dim: rgba(188,140,255,0.15);
+    --header-bg: #090d14; --section-border: #f0c060;
+    --highlight-bg: rgba(240,192,96,0.18); --table-head: #212840;
+    --table-even: rgba(255,255,255,0.03); --scrollbar: #30363d;
+  }
+  :root[data-theme="light"] {
+    --bg: #fdf6ec; --bg2: #f4ede0; --card: #ffffff; --card-hover: #f7f3ec;
+    --border: rgba(15,29,59,0.08); --text: #0f1d3b; --text-muted: #6b7a99; --text-sub: #2b3a5a;
+    --gold: #c8960a; --gold-dim: rgba(200,150,10,0.12);
+    --teal: #1a7f6e; --teal-dim: #e8f4f1;
+    --red: #c0392b; --red-dim: #fde8e8;
+    --purple: #5a3ea0; --purple-dim: #eee8ff;
+    --header-bg: #0f1d3b; --section-border: #e8b84b;
+    --highlight-bg: #fff3c2; --table-head: #0f1d3b;
+    --table-even: #f9f7f4; --scrollbar: #ccc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 3px; }
+  body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); min-height: 100vh; transition: background 0.4s, color 0.4s; }
+
+  #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particle { position: absolute; border-radius: 50%; opacity: 0; animation: floatUp linear infinite; }
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 0.4; } 90% { opacity: 0.15; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+
+  header { background: var(--header-bg); padding: 2.5rem 2rem 0; text-align: center; position: relative; overflow: hidden; z-index: 1; }
+  .header-glow { position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 400px; height: 200px; background: radial-gradient(ellipse, rgba(240,192,96,0.18) 0%, transparent 70%); animation: pulseGlow 4s ease-in-out infinite; }
+  @keyframes pulseGlow { 0%,100%{opacity:.6;transform:translateX(-50%) scale(1);}50%{opacity:1;transform:translateX(-50%) scale(1.15);} }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,4vw,2.4rem); color: #fff; letter-spacing: 0.02em; position: relative; animation: slideDown 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+  header p { color: var(--gold); font-size: 0.9rem; margin-top: 0.4rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; position: relative; animation: slideDown 0.8s 0.1s cubic-bezier(0.22,1,0.36,1) both; }
+  @keyframes slideDown { from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);} }
+
+  .theme-toggle { position: absolute; top: 1rem; right: 1rem; background: var(--gold-dim); border: 1px solid var(--gold); color: var(--gold); padding: 0.35rem 0.75rem; border-radius: 20px; cursor: pointer; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; transition: all 0.2s; z-index: 10; }
+  .theme-toggle:hover { background: var(--gold); color: #000; }
+
+  .tabs { display: flex; max-width: 860px; margin: 2rem auto 0; padding: 0 1rem; border-bottom: 1px solid var(--border); position: relative; }
+  .tab-btn { flex: 1; padding: 0.8rem 0.5rem; background: transparent; color: var(--text-muted); border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; border-bottom: 3px solid transparent; position: relative; bottom: -1px; }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1rem 5rem; position: relative; z-index: 1; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .module-banner {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin: 2.5rem 0 1.2rem; padding: 0.8rem 1.2rem;
+    border-radius: 12px; font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+  }
+  .module-banner.q1 { background: rgba(57,210,166,0.1); border: 1px solid rgba(57,210,166,0.3); color: var(--teal); }
+  .module-banner.q2 { background: rgba(188,140,255,0.1); border: 1px solid rgba(188,140,255,0.3); color: var(--purple); }
+  .module-banner.q3 { background: rgba(240,192,96,0.12); border: 1px solid rgba(240,192,96,0.3); color: var(--gold); }
+  .module-banner .badge { font-size: 0.65rem; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 20px; }
+  .q1 .badge { background: var(--teal-dim); }
+  .q2 .badge { background: var(--purple-dim); }
+  .q3 .badge { background: var(--gold-dim); }
+
+  .section-label { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text); margin: 1.8rem 0 0.8rem; padding: 0.45rem 0.8rem; border-left: 4px solid var(--section-border); background: var(--gold-dim); border-radius: 0 8px 8px 0; animation: fadeInLeft 0.5s ease both; }
+  .section-label.teal  { border-left-color: var(--teal);   background: var(--teal-dim); }
+  .section-label.purple{ border-left-color: var(--purple); background: var(--purple-dim); }
+  @keyframes fadeInLeft { from{opacity:0;transform:translateX(-16px);}to{opacity:1;transform:translateX(0);} }
+
+  .card { background: var(--card); border-radius: 14px; box-shadow: 0 2px 16px rgba(0,0,0,0.25); margin-bottom: 0.85rem; overflow: hidden; border: 1px solid var(--border); transition: transform 0.2s,box-shadow 0.2s,border-color 0.2s; animation: cardIn 0.4s ease both; }
+  @keyframes cardIn { from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);} }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,0,0,0.35); border-color: rgba(240,192,96,0.25); }
+  .card-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.2rem; cursor: pointer; user-select: none; transition: background 0.15s; gap: 1rem; }
+  .card-header:hover { background: var(--card-hover); }
+  .card-title { font-weight: 600; font-size: 0.97rem; color: var(--text); flex: 1; }
+  .tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.22rem 0.6rem; border-radius: 20px; white-space: nowrap; }
+  .tag-def     { background: var(--teal-dim);   color: var(--teal); }
+  .tag-example { background: var(--gold-dim);   color: var(--gold); }
+  .tag-types   { background: var(--purple-dim); color: var(--purple); }
+  .tag-key     { background: var(--red-dim);    color: var(--red); }
+  .chevron { font-size: 0.9rem; color: var(--text-muted); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); flex-shrink: 0; }
+  .card.open .chevron { transform: rotate(180deg); }
+  .card-body { display: none; padding: 0 1.2rem 1.2rem; border-top: 1px solid var(--border); animation: expandIn 0.25s ease both; }
+  @keyframes expandIn { from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);} }
+  .card.open .card-body { display: block; }
+  .card-body p,.card-body li { font-size: 0.92rem; line-height: 1.75; color: var(--text-sub); }
+  .card-body ul { padding-left: 1.3rem; margin-top: 0.5rem; }
+  .card-body li { margin-bottom: 0.35rem; }
+  .highlight { background: var(--highlight-bg); padding: 0.1em 0.35em; border-radius: 4px; font-weight: 600; color: var(--text); }
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: 0.9rem; font-size: 0.86rem; border-radius: 8px; overflow: hidden; }
+  .compare-table th { background: var(--table-head); color: #fff; padding: 0.55rem 0.8rem; text-align: left; font-weight: 600; }
+  .compare-table td { padding: 0.45rem 0.8rem; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text-sub); }
+  .compare-table tr:nth-child(even) td { background: var(--table-even); }
+
+  /* FLASHCARD */
+  .flashcard-area { margin-top: 1.5rem; }
+  .fc-progress { text-align: center; font-size: 0.83rem; color: var(--text-muted); margin-bottom: 1.2rem; font-weight: 500; }
+  .fc-scene { perspective: 1200px; margin: 0 auto; max-width: 600px; }
+  .flashcard { background: transparent; border-radius: 18px; min-height: 240px; cursor: pointer; position: relative; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(0.22,1,0.36,1); box-shadow: 0 8px 40px rgba(0,0,0,0.4); }
+  .flashcard.flipped { transform: rotateY(180deg); }
+  .fc-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; border: 1.5px solid var(--border); }
+  .fc-front { background: var(--card); border-color: rgba(240,192,96,0.3); }
+  .fc-back { background: linear-gradient(135deg,#1a2744 0%,#1c3340 100%); border-color: rgba(57,210,166,0.3); transform: rotateY(180deg); }
+  .fc-label { position: absolute; top: 0.9rem; left: 1.1rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .fc-front .fc-label { color: var(--gold); }
+  .fc-back  .fc-label { color: var(--teal); }
+  .fc-module-tag { position: absolute; top: 0.9rem; right: 1.1rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 10px; }
+  .fc-question { font-family: 'Playfair Display', serif; font-size: clamp(1.05rem,2.5vw,1.25rem); color: var(--text); line-height: 1.5; }
+  .fc-answer { font-size: 0.93rem; color: #c9fbe9; line-height: 1.75; white-space: pre-line; }
+  .fc-hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 1.2rem; }
+  .fc-controls { display: flex; gap: 0.8rem; justify-content: center; margin-top: 1.4rem; flex-wrap: wrap; }
+  .fc-bar-wrap { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 1.2rem; }
+  .fc-bar { height: 4px; background: var(--gold); border-radius: 2px; transition: width 0.4s ease; }
+
+  .filter-row { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  .filter-btn { background: var(--card); border: 1px solid var(--border); color: var(--text-muted); padding: 0.35rem 0.9rem; border-radius: 20px; cursor: pointer; font-family: 'DM Sans',sans-serif; font-size: 0.78rem; font-weight: 600; transition: all 0.15s; }
+  .filter-btn:hover { border-color: var(--gold); color: var(--text); }
+  .filter-btn.active-f { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+  .filter-btn.f1.active-f { border-color: var(--teal); color: var(--teal); background: var(--teal-dim); }
+  .filter-btn.f2.active-f { border-color: var(--purple); color: var(--purple); background: var(--purple-dim); }
+
+  .btn { padding: 0.6rem 1.4rem; border-radius: 10px; border: none; cursor: pointer; font-family: 'DM Sans',sans-serif; font-weight: 600; font-size: 0.88rem; transition: all 0.18s; letter-spacing: 0.03em; }
+  .btn-primary { background: #2a3a6e; color: #fff; }
+  .btn-primary:hover { background: #3a4e8e; transform: translateY(-1px); }
+  .btn-gold { background: var(--gold); color: #0d1117; }
+  .btn-gold:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .btn-outline { background: transparent; border: 1.5px solid var(--text-muted); color: var(--text); }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+
+  .quiz-intro { text-align: center; padding: 3rem 1rem; }
+  .quiz-intro h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.7rem; color: var(--text); }
+  .quiz-intro p { color: var(--text-muted); margin-bottom: 1.8rem; }
+  .quiz-filter-row { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .qf-btn { background: var(--card); border: 1px solid var(--border); color: var(--text-muted); padding: 0.4rem 1rem; border-radius: 20px; cursor: pointer; font-family: 'DM Sans',sans-serif; font-size: 0.8rem; font-weight: 600; transition: all 0.15s; }
+  .qf-btn.on { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+  .qf-btn.on.q1c { border-color: var(--teal); color: var(--teal); background: var(--teal-dim); }
+  .qf-btn.on.q2c { border-color: var(--purple); color: var(--purple); background: var(--purple-dim); }
+  .quiz-q { background: var(--card); border-radius: 14px; padding: 1.4rem 1.4rem 1rem; box-shadow: 0 2px 16px rgba(0,0,0,0.25); margin-bottom: 1.4rem; border: 1px solid var(--border); animation: cardIn 0.35s ease both; }
+  .quiz-q-text { font-weight: 600; font-size: 0.97rem; margin-bottom: 1rem; line-height: 1.55; color: var(--text); }
+  .quiz-q-module { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .quiz-opt { display: block; padding: 0.65rem 0.95rem; border-radius: 9px; cursor: pointer; margin-bottom: 0.45rem; border: 1.5px solid var(--border); font-size: 0.9rem; background: transparent; width: 100%; text-align: left; font-family: 'DM Sans',sans-serif; color: var(--text-sub); transition: all 0.15s; }
+  .quiz-opt:hover { background: var(--gold-dim); border-color: var(--gold); color: var(--text); }
+  .quiz-opt.correct { background: var(--teal-dim); border-color: var(--teal); color: var(--teal); font-weight: 600; pointer-events: none; }
+  .quiz-opt.wrong   { background: var(--red-dim);  border-color: var(--red);  color: var(--red);  pointer-events: none; }
+  .quiz-opt.disabled { pointer-events: none; opacity: 0.5; }
+  .quiz-feedback { font-size: 0.86rem; margin-top: 0.7rem; padding: 0.55rem 0.9rem; border-radius: 8px; line-height: 1.5; }
+  .quiz-feedback.ok  { background: var(--teal-dim); color: var(--teal); }
+  .quiz-feedback.bad { background: var(--red-dim);  color: var(--red); }
+  .quiz-score { text-align: center; background: linear-gradient(135deg,#0d2040 0%,#0d3030 100%); color: #fff; border-radius: 18px; padding: 2.5rem; margin-top: 1rem; border: 1px solid rgba(240,192,96,0.2); animation: popIn 0.4s cubic-bezier(0.22,1,0.36,1) both; }
+  @keyframes popIn { from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);} }
+  .quiz-score h2 { font-family: 'Playfair Display', serif; font-size: 2rem; }
+  .quiz-score p  { color: rgba(255,255,255,0.7); margin-top: 0.5rem; }
+  .big-score { font-size: 3.5rem; font-weight: 900; color: var(--gold); display: block; margin: 0.6rem 0; animation: countUp 0.5s ease; }
+  @keyframes countUp { from{transform:scale(0.5);opacity:0;}to{transform:scale(1);opacity:1;} }
+  .ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: rippleAnim 0.5s linear; background: rgba(240,192,96,0.2); pointer-events: none; }
+  @keyframes rippleAnim { to{transform:scale(4);opacity:0;} }
+</style>
+</head>
+<body>
+<div id="particles"></div>
+
+<header>
+  <div class="header-glow"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀ Light</button>
+  <h1>GE 5 – Purposive Communication</h1>
+  <p>Quiz 1 · Quiz 2 · Quiz 3 &nbsp;|&nbsp; 126 Terms Total</p>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('notes',event)">📖 Notes</button>
+    <button class="tab-btn" onclick="switchTab('flashcards',event)">🃏 Flashcards</button>
+    <button class="tab-btn" onclick="switchTab('quiz',event)">✏️ Quiz</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== NOTES TAB ===== -->
+<div class="tab-content active" id="tab-notes">
+
+  <!-- QUIZ 1 -->
+  <div class="module-banner q1"><span class="badge">Quiz 1</span> Communication Foundations</div>
+
+  <p class="section-label teal">Part 1 – What is Communication?</p>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Communication (Two Definitions)</span><span class="tag tag-def">Definition</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <ul>
+        <li>Involves <span class="highlight">verbal and non-verbal</span> expression of thoughts and feelings. A yawn or a phone call exemplifies non-verbal and verbal messages, respectively.</li>
+        <li>Is <span class="highlight">sharing ideas through a medium</span>, focusing on interaction.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Communication Components</span><span class="tag tag-key">Key Concept</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>Component</th><th>Description</th></tr>
+        <tr><td><strong>Source</strong></td><td>The sender crafts the message, such as an author or speaker.</td></tr>
+        <tr><td><strong>Message</strong></td><td>The shared meaning, like poems or road signs.</td></tr>
+        <tr><td><strong>Channel</strong></td><td>The medium, like a phone or letter.</td></tr>
+        <tr><td><strong>Receiver</strong></td><td>The recipient who listens or reads carefully.</td></tr>
+        <tr><td><strong>Feedback</strong></td><td>Essential for understanding, expressed in various forms like nods.</td></tr>
+        <tr><td><strong>Environment</strong></td><td>The physical and emotional setting of communication.</td></tr>
+        <tr><td><strong>Context</strong></td><td>Involves the expectations of the sender and the receiver and the common or shared understanding through the environmental signals.</td></tr>
+        <tr><td><strong>Interference</strong></td><td>Also known as barrier or block that prevents effective communication to take place.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Kinds of Interference</span><span class="tag tag-types">Types</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>Type</th><th>Description</th></tr>
+        <tr><td><strong>Psychological</strong></td><td>Barriers are thoughts that hamper the message to be interpreted correctly by the receiver.</td></tr>
+        <tr><td><strong>Physical</strong></td><td>Barriers include competing stimulus, weather and climate, health and ignorance of the medium.</td></tr>
+        <tr><td><strong>Linguistic and Cultural</strong></td><td>Barriers pertain to the language and its cultural environment. Words may mean another in different cultures.</td></tr>
+        <tr><td><strong>Mechanical</strong></td><td>Barriers are those raised by the channels employed for inter-personal, group or mass communication. These include cellphones, laptops and other gadgets used in communication.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <p class="section-label teal">Part 2 – Effective Communication</p>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Michael Osborn (2009) — Nine Principles of Effective Communication</span><span class="tag tag-key">Key Concept</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <ul>
+        <li><span class="highlight">Clarity</span> – makes speeches understandable. Fuzzy language is absolutely forbidden, as are jargons, cliché expressions, euphemisms and doublespeak language.</li>
+        <li><span class="highlight">Concreteness</span> – reduces misunderstandings. Messages must be supported by facts such as research data, statistics or figures. To achieve concreteness, abstract words must be avoided.</li>
+        <li><span class="highlight">Courtesy</span> – builds goodwill. It involves being polite in terms of approach and manner of addressing an individual.</li>
+        <li><span class="highlight">Correctness</span> – glaring mistakes in grammar obscures the meaning of a sentence. Also, the misuse of language can damage your credibility.</li>
+        <li><span class="highlight">Consideration</span> – messages must be geared towards the audience. The sender must consider the recipient's profession, level of education, race, ethnicity, hobbies, interests, passions, advocacies and age when drafting or delivering a message.</li>
+        <li><span class="highlight">Creativity</span> – in communication means having the ability to craft interesting messages in terms of sentence structure and word choice.</li>
+        <li><span class="highlight">Conciseness</span> – simplicity and directness help you to be concise. Avoid using lengthy expressions and words that may confuse the recipient.</li>
+        <li><span class="highlight">Cultural Sensitivity</span> – today, with the increasing emphasis on empowering diverse cultures, lifestyles, and races and the pursuit for gender equality, cultural sensitivity becomes an important standard for effective communication.</li>
+        <li><span class="highlight">Captivating</span> – you must strive to make messages interesting to command more attention and better responses.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="section-label teal">Part 3 – Ethics & Globalization</p>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Ethics in Communication</span><span class="tag tag-def">Definition</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p><span class="highlight">Ethics</span> is a branch of philosophy that focuses on issues of right and wrong in human affairs.</p>
+      <p style="margin-top:0.7rem;"><strong>Ethical Communicators:</strong></p>
+      <ul>
+        <li>Respect audience</li>
+        <li>Consider the result of communication</li>
+        <li>Value truth</li>
+        <li>Use information correctly</li>
+        <li>Do not falsify information</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Globalization</span><span class="tag tag-def">Definition</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p><span class="highlight">Globalization</span> is the communication and assimilation among individuals, ethnicities, races, institutions, governments of various nations supported by technology and compelled by international trade.</p>
+      <p style="margin-top:0.6rem;">It is not a new process or concept. Years before the advent of technology, people had been purchasing and selling each other properties, goods and other objects of certain value.</p>
+      <p style="margin-top:0.7rem;"><strong>Possible Cultural Barriers:</strong></p>
+      <ul>
+        <li>Cultural relativism</li>
+        <li>Lack of knowledge of others' culture</li>
+        <li>Discrimination and harassment</li>
+        <li>Language differences</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Krizan (2014) — Strategies to Become an Effective Global Communicator</span><span class="tag tag-key">Key Concept</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <ul>
+        <li>Review communication principles</li>
+        <li>Analyze the message receiver</li>
+        <li>Be open to and accepting of other cultures</li>
+        <li>Learn about cultures and apply what is learned</li>
+        <li>Consider language needs</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- QUIZ 2 -->
+  <div class="module-banner q2" style="margin-top:3rem;"><span class="badge">Quiz 2</span> Intercultural & Language Variation</div>
+
+  <p class="section-label purple">Part 4 – Intercultural Communication</p>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Intercultural Communication (Jandt, 1998)</span><span class="tag tag-def">Definition</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p><span class="highlight">Intercultural communication</span> refers to interaction with people from diverse cultures (Jandt, 1998).</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Forms of Intercultural Communication</span><span class="tag tag-types">Types</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>Form</th><th>Description</th></tr>
+        <tr><td><strong>Interracial</strong></td><td>Communicating with people from different races.</td></tr>
+        <tr><td><strong>Interethnic</strong></td><td>Interacting with people of different ethnic origins.</td></tr>
+        <tr><td><strong>International</strong></td><td>Communicating between representatives from different nations.</td></tr>
+        <tr><td><strong>Intracultural</strong></td><td>Interacting with members of the same racial or ethnic group or co-culture.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Communication Styles Among Cultures (Gamble & Gamble, 2008)</span><span class="tag tag-key">Key Concept</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>Style</th><th>Description</th></tr>
+        <tr><td><strong>High-context communication</strong></td><td>A tradition-linked communication system which adheres strongly to being indirect.</td></tr>
+        <tr><td><strong>Low-context communication</strong></td><td>A system that works on straightforward communication.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <p class="section-label purple">Part 5 – Language Variation (Mahboob, 2014 & Lin, 2016)</p>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Language Variation — Domains</span><span class="tag tag-types">Types</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p>Mahboob (2014) identifies <strong>8 different domains</strong> in which language varies depending on the combinations of three dimensions: <span class="highlight">field</span>, <span class="highlight">tenor</span>, and <span class="highlight">mode</span> of the context of communication.</p>
+      <p style="margin-top:0.6rem;">Spoken mode is often associated with everyday registers while written mode is strongly associated with academic registers (Lin, 2016).</p>
+      <table class="compare-table" style="margin-top:0.9rem;">
+        <tr><th>4 Local Domains</th><th>4 Global Domains</th></tr>
+        <tr><td>Local everyday written</td><td>Global everyday written</td></tr>
+        <tr><td>Local everyday oral</td><td>Global everyday oral</td></tr>
+        <tr><td>Local specialized written</td><td>Global specialized written</td></tr>
+        <tr><td>Local specialized oral</td><td>Global specialized oral</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">8 Domain Descriptions</span><span class="tag tag-def">Definition</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>Domain</th><th>Description</th></tr>
+        <tr><td><strong>Local everyday written</strong></td><td>May include instances of local everyday written usage found in the neighborhood posters.</td></tr>
+        <tr><td><strong>Local everyday oral</strong></td><td>May occur in local communication among neighbors in everyday, informal and local varieties of languages.</td></tr>
+        <tr><td><strong>Local specialized written</strong></td><td>Usage can be found in the publications and web sites of local societies such as the Baguio Midland Courier.</td></tr>
+        <tr><td><strong>Local specialized oral</strong></td><td>Involves specialized discourses. For example, in a computer shop in the neighborhood, specialized local usage can be found.</td></tr>
+        <tr><td><strong>Global everyday written</strong></td><td>Avoids local colloquialisms to make the text accessible to wider communities of readers.</td></tr>
+        <tr><td><strong>Global everyday oral</strong></td><td>May occur in interactions between people coming from different parts of the world when they talk about everyday casual topics.</td></tr>
+        <tr><td><strong>Global specialized written</strong></td><td>Expands to as many readers internationally, hence the non-usage of local colloquial expressions.</td></tr>
+        <tr><td><strong>Global specialized oral</strong></td><td>Occurs when people from different parts of the world discuss specialized topics in spoken form.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- QUIZ 3 -->
+  <div class="module-banner q3" style="margin-top:3rem;"><span class="badge">Quiz 3</span> Media, Communication Types & Public Speaking</div>
+
+  <p class="section-label">Part 6 – Media Literacy & Text</p>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Key Concepts of Media Literacy</span><span class="tag tag-key">Key Concept</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p>The Key Concepts of Media Literacy framework <span class="highlight">serves as a basis for developing a critical understanding of the content of mass media</span> and can be very helpful in the construction of media texts for different purposes.</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Text</span><span class="tag tag-def">Definition</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p>The term <span class="highlight">text</span> includes any form of written, spoken or media work conveying meaning to an audience. Text may use words, graphics, sounds and images in presenting information. It may also be in oral, print, visual or electronic form.</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Multimedia Presentations</span><span class="tag tag-key">Key Concept</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p><strong>Characteristics:</strong> Visually oriented; use different modalities.</p>
+      <p style="margin-top:0.7rem;"><strong>Steps in Making an Effective Multimedia Presentation:</strong></p>
+      <ul>
+        <li>Know the purpose of the presentation</li>
+        <li>Know the audience</li>
+        <li>Gather information</li>
+        <li>Use a variety of resources</li>
+        <li>Do not forget to cite resources</li>
+        <li>Organize the information</li>
+        <li>Check Technical Issue</li>
+        <li>Be Creative</li>
+      </ul>
+      <p style="margin-top:0.7rem;"><strong>Technology enhances different forms of communication such as:</strong> intrapersonal, interpersonal, small group, public, and mass communication.</p>
+      <p style="margin-top:0.6rem;"><span class="highlight">Pecha Kucha</span> – a 20-slide PowerPoint presentation which moves automatically to each succeeding slide every after 20 seconds. Very helpful to keep track of the time.</p>
+    </div>
+  </div>
+
+  <p class="section-label">Part 7 – Blogging & Informative/Persuasive Communication</p>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Blogging</span><span class="tag tag-def">Definition</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p><span class="highlight">Blogging</span> has become one of the effective ways of communicating and networking among students, professionals, businessmen, public officials, etc.</p>
+      <p style="margin-top:0.5rem;">Blog is short for <strong>weblog</strong>. Blogs are personal journal websites on which a user can type an entry and add images, videos and links to other websites.</p>
+      <p style="margin-top:0.5rem;">According to <strong>Richardson (2006)</strong>, the use of blogs has been an engaging and effective way to promote writing skills of primary students, particularly when student peers provide feedback to the blog.</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Informative Communication</span><span class="tag tag-def">Definition</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p><span class="highlight">Informative Communication</span> involves giving than asking. As an informative communicator, you want your receivers to pay attention and understand, but not to change their behavior.</p>
+      <p style="margin-top:0.7rem;"><strong>Factors (Osborn, 2009):</strong></p>
+      <ul>
+        <li>We seek to expand our awareness of the world around us.</li>
+        <li>We seek to become more competent.</li>
+        <li>We have an abiding curiosity about how things work and how they are made.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Persuasive & Argumentative Communication</span><span class="tag tag-types">Types</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p><span class="highlight">Persuasive Communication</span> is an art of gaining fair and favorable considerations from our point of view.</p>
+      <p style="margin-top:0.6rem;"><span class="highlight">Argumentative Communication</span> relies heavily on soundproof and reasoning. The nature of proof has been studied since the Golden Age of Greece and has been improved through time.</p>
+      <p style="margin-top:0.7rem;"><strong>Lucas (2007) — To avoid defective argumentation, avoid:</strong></p>
+      <ul>
+        <li><strong>Defective evidence:</strong> Misuse of facts, Statistical fallacies, Defective Testimony, Inappropriate evidence</li>
+        <li><strong>Defective Patterns of reasoning:</strong> Evidential fallacies, Slippery slope, Confusing facts with opinions, Red herring, Myth of the mean, Flawed proofs, Defective arguments</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="section-label">Part 8 – Public Speaking & Making Inquiries</p>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Public Speaking & Speech Delivery Methods</span><span class="tag tag-key">Key Concept</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p><span class="highlight">Public Speaking</span> is a process of speaking in a structured, deliberate manner to inform, influence or entertain the audience.</p>
+      <p style="margin-top:0.6rem;"><span class="highlight">Speech</span> is the term to refer to the body spoken expression of information and ideas.</p>
+      <table class="compare-table" style="margin-top:0.9rem;">
+        <tr><th>Method</th><th>Description</th></tr>
+        <tr><td><strong>Reading from Manuscript</strong></td><td>Appropriate when the speech is long and when details are complicated and essential such as they need to be given completely.</td></tr>
+        <tr><td><strong>Memorized</strong></td><td>Speech requires a speaker to commit everything to memory; excellent for short messages although also used for long pieces in oratorical, declamation and other literally contest.</td></tr>
+        <tr><td><strong>Extemporaneous Speaking</strong></td><td>May have a long or short preparation. The Speaker may use an outline to guide him through his speech to achieve better organization and to avoid leaving out details.</td></tr>
+        <tr><td><strong>Impromptu</strong></td><td>Means at the spur of the moments; since there is very minimal or no time for preparation.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Making Inquiries</span><span class="tag tag-key">Key Concept</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p><span class="highlight">Making inquiries</span> is the act of asking questions to get information. It is an important communication skill used in school, business, and everyday life.</p>
+      <p style="margin-top:0.7rem;"><strong>Types of Inquiry:</strong></p>
+      <ul>
+        <li><strong>Personal Inquiry</strong> – asking information personally.</li>
+        <li><strong>Business Inquiry</strong> – asking information related to business or services.</li>
+        <li><strong>Academic Inquiry</strong> – asking questions related to school or education.</li>
+      </ul>
+      <p style="margin-top:0.7rem;"><strong>Ways of Making Inquiries:</strong> Letter, Email, Phone Call, Face-to-Face Conversation</p>
+      <p style="margin-top:0.7rem;"><strong>Important Parts of an Inquiry:</strong> Greeting, Introduction, Purpose, Questions, Closing</p>
+      <p style="margin-top:0.7rem;"><strong>Importance of Making Inquiries:</strong></p>
+      <ul>
+        <li>It helps people get accurate information.</li>
+        <li>It improves communication skills.</li>
+        <li>It helps with decision making.</li>
+        <li>It avoids misunderstanding.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleCard(this,event)">
+    <div class="card-header"><span class="card-title">Communication for Work Purposes</span><span class="tag tag-key">Key Concept</span><span class="chevron">▼</span></div>
+    <div class="card-body">
+      <p><span class="highlight">Communication for work purposes</span> is the professional way of sharing information to get a job done correctly. It is not just casual talking; it is about being accurate, organized, and ethical in your specific field.</p>
+      <table class="compare-table" style="margin-top:0.9rem;">
+        <tr><th>Term</th><th>Description</th></tr>
+        <tr><td><strong>Managing Information</strong></td><td>Handling a "plethora" or a huge amount of data without getting confused.</td></tr>
+        <tr><td><strong>Systematic Recording</strong></td><td>Organizing details from informants so they can be easily recalled later.</td></tr>
+        <tr><td><strong>Professional Documentation</strong></td><td>Writing reports that serve as a permanent record of your work.</td></tr>
+        <tr><td><strong>Initial notes</strong></td><td>Refer to the first or earliest assessment.</td></tr>
+        <tr><td><strong>Interim or progress notes</strong></td><td>Refer to the assessment reports done in order to monitor the condition of the patient.</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+<!-- END NOTES -->
+
+<!-- ===== FLASHCARDS TAB ===== -->
+<div class="tab-content" id="tab-flashcards">
+  <div class="flashcard-area">
+    <div class="filter-row">
+      <button class="filter-btn f1 active-f" id="fbtn-q1" onclick="toggleFilter('q1')">Quiz 1 – Foundations</button>
+      <button class="filter-btn f2 active-f" id="fbtn-q2" onclick="toggleFilter('q2')">Quiz 2 – Intercultural</button>
+      <button class="filter-btn active-f" id="fbtn-q3" onclick="toggleFilter('q3')">Quiz 3 – Media & Speaking</button>
+    </div>
+    <div class="fc-bar-wrap"><div class="fc-bar" id="fcBar" style="width:0%"></div></div>
+    <p class="fc-progress" id="fcProgress">Card 1 of —</p>
+    <div class="fc-scene">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="fc-face fc-front">
+          <span class="fc-label">Question</span>
+          <span class="fc-module-tag" id="fcModTag"></span>
+          <p class="fc-question" id="fcQuestion">Loading…</p>
+          <p class="fc-hint">Tap to reveal answer</p>
+        </div>
+        <div class="fc-face fc-back">
+          <span class="fc-label">Answer</span>
+          <p class="fc-answer" id="fcAnswer"></p>
+        </div>
+      </div>
+    </div>
+    <div class="fc-controls">
+      <button class="btn btn-outline" onclick="prevCard()">← Prev</button>
+      <button class="btn btn-primary" onclick="shuffleCards()">🔀 Shuffle</button>
+      <button class="btn btn-outline" onclick="nextCard()">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ TAB ===== -->
+<div class="tab-content" id="tab-quiz">
+  <div class="quiz-intro" id="quiz-intro">
+    <h2>Test Your Knowledge</h2>
+    <p>Select which quizzes to include:</p>
+    <div class="quiz-filter-row">
+      <button class="qf-btn q1c on" id="qfb-q1" onclick="toggleQuizFilter('q1')">Quiz 1 — Communication Foundations</button>
+      <button class="qf-btn q2c on" id="qfb-q2" onclick="toggleQuizFilter('q2')">Quiz 2 — Intercultural & Language</button>
+      <button class="qf-btn on" id="qfb-q3" onclick="toggleQuizFilter('q3')">Quiz 3 — Media & Speaking</button>
+    </div>
+    <button class="btn btn-gold" onclick="startQuiz()">Start Quiz →</button>
+  </div>
+  <div id="quiz-body" style="display:none"></div>
+</div>
+
+</main>
+
+<script>
+// PARTICLES
+(function(){
+  const c=document.getElementById('particles'),cols=['#f0c060','#39d2a6','#bc8cff','#f85149'];
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');p.className='particle';
+    const s=Math.random()*5+3;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${Math.random()*15+12}s;animation-delay:${Math.random()*10}s;`;
+    c.appendChild(p);
+  }
+})();
+
+function toggleTheme(){
+  const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';
+  h.setAttribute('data-theme',d?'light':'dark');
+  document.getElementById('themeBtn').textContent=d?'🌙 Dark':'☀ Light';
+}
+function switchTab(n,e){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');
+  e.target.classList.add('active');
+  if(n==='flashcards') initFlashcards();
+}
+function toggleCard(el,e){
+  const h=el.querySelector('.card-header'),r=h.getBoundingClientRect();
+  const rp=document.createElement('span');rp.className='ripple';
+  const s=Math.max(r.width,r.height);
+  rp.style.cssText=`width:${s}px;height:${s}px;left:${(e.clientX||r.left+r.width/2)-r.left-s/2}px;top:${(e.clientY||r.top+r.height/2)-r.top-s/2}px`;
+  h.style.position='relative';h.style.overflow='hidden';
+  h.appendChild(rp);setTimeout(()=>rp.remove(),500);
+  el.classList.toggle('open');
+}
+
+// ===== FLASHCARD DATA =====
+const allCards=[
+  // QUIZ 1
+  {m:'q1',q:"Involves verbal and non-verbal expression of thoughts and feelings.",a:"Communication"},
+  {m:'q1',q:"Is sharing ideas through a medium, focusing on interaction.",a:"Communication"},
+  {m:'q1',q:"The sender crafts the message, such as an author or speaker.",a:"Source"},
+  {m:'q1',q:"The shared meaning, like poems or road signs.",a:"Message"},
+  {m:'q1',q:"The medium, like a phone or letter.",a:"Channel"},
+  {m:'q1',q:"The recipient who listens or reads carefully.",a:"Receiver"},
+  {m:'q1',q:"Essential for understanding, expressed in various forms like nods.",a:"Feedback"},
+  {m:'q1',q:"The physical and emotional setting of communication.",a:"Environment"},
+  {m:'q1',q:"Involves the expectations of the sender and receiver and the common or shared understanding through the environmental signals.",a:"Context"},
+  {m:'q1',q:"Also known as barrier or block that prevents effective communication to take place.",a:"Interference"},
+  {m:'q1',q:"Barriers that are thoughts hampering the message to be interpreted correctly by the receiver.",a:"Psychological Interference"},
+  {m:'q1',q:"Barriers include competing stimulus, weather and climate, health and ignorance of the medium.",a:"Physical Interference"},
+  {m:'q1',q:"Barriers pertain to the language and its cultural environment. Words may mean another in different cultures.",a:"Linguistic and Cultural Interference"},
+  {m:'q1',q:"Barriers raised by channels employed for inter-personal, group or mass communication — cellphones, laptops and gadgets.",a:"Mechanical Interference"},
+  {m:'q1',q:"Claims that communication must meet certain standards for effective communication to take place.",a:"Michael Osborn (2009)"},
+  {m:'q1',q:"Makes speeches understandable. Fuzzy language, jargons, cliché expressions, euphemisms and doublespeak are forbidden.",a:"Clarity"},
+  {m:'q1',q:"Reduces misunderstandings. Messages must be supported by facts, statistics or figures. Abstract words must be avoided.",a:"Concreteness"},
+  {m:'q1',q:"Builds goodwill. Involves being polite in terms of approach and manner of addressing an individual.",a:"Courtesy"},
+  {m:'q1',q:"Glaring mistakes in grammar obscures the meaning. Misuse of language can damage your credibility.",a:"Correctness"},
+  {m:'q1',q:"Messages must be geared towards the audience, considering profession, education, race, ethnicity, hobbies, interests, and age.",a:"Consideration"},
+  {m:'q1',q:"Having the ability to craft interesting messages in terms of sentence structure and word choice.",a:"Creativity"},
+  {m:'q1',q:"Simplicity and directness. Avoid lengthy expressions and words that may confuse the recipient.",a:"Conciseness"},
+  {m:'q1',q:"Empowering diverse cultures, lifestyles, and races and the pursuit for gender equality makes this principle important.",a:"Cultural Sensitivity"},
+  {m:'q1',q:"You must strive to make messages interesting to command more attention and better responses.",a:"Captivating"},
+  {m:'q1',q:"A branch of philosophy that focuses on issues of right and wrong in human affairs.",a:"Ethics"},
+  {m:'q1',q:"Communication and assimilation among individuals, ethnicities, races, institutions, governments of various nations.",a:"Globalization"},
+  {m:'q1',q:"Possible cultural barriers include _____, lack of knowledge of others' culture, discrimination and harassment, language differences.",a:"Cultural relativism"},
+  {m:'q1',q:"Suggests strategies: Review communication principles, Analyze message receiver, Be open to other cultures, Learn and apply cultures, Consider language needs.",a:"Krizan (2014)"},
+  // QUIZ 2
+  {m:'q2',q:"Refers to interaction with people from diverse cultures (Jandt, 1998).",a:"Intercultural communication"},
+  {m:'q2',q:"Communicating with people from different races.",a:"Interracial"},
+  {m:'q2',q:"Interacting with people of different ethnic origins.",a:"Interethnic"},
+  {m:'q2',q:"Communicating between representatives from different nations.",a:"International"},
+  {m:'q2',q:"Interacting with members of the same racial or ethnic group or co-culture.",a:"Intracultural"},
+  {m:'q2',q:"According to Gamble and Gamble (2008), communication style among introspecting cultures may be high-context or low-context.",a:"Communication style among cultures"},
+  {m:'q2',q:"A tradition-linked communication system which adheres strongly to being indirect.",a:"High-context communication"},
+  {m:'q2',q:"A system that works on straightforward communication.",a:"Low-context communication"},
+  {m:'q2',q:"Is often associated with everyday registers while written mode is strongly associated with academic registers.",a:"Spoken mode (Lin, 2016)"},
+  {m:'q2',q:"Identifies eight different domains in which language varies depending on the combinations of field, tenor, and mode.",a:"Mahboob (2014)"},
+  {m:'q2',q:"The three dimensions of the context of communication.",a:"Field, Tenor, Mode"},
+  {m:'q2',q:"The four local domains of language.",a:"Local everyday written\nLocal everyday oral\nLocal specialized written\nLocal specialized oral"},
+  {m:'q2',q:"The four global domains of language.",a:"Global everyday written\nGlobal everyday oral\nGlobal specialized written\nGlobal specialized oral"},
+  {m:'q2',q:"Avoids local colloquialisms to make the text accessible to wider communities of readers.",a:"Global everyday written"},
+  {m:'q2',q:"May occur in interactions between people from different parts of the world talking about everyday casual topics.",a:"Global everyday oral"},
+  {m:'q2',q:"Expands to as many readers internationally, hence the non-usage of local colloquial expressions.",a:"Global specialized written"},
+  {m:'q2',q:"Occurs when people from different parts of the world discuss specialized topics in spoken form.",a:"Global specialized oral"},
+  {m:'q2',q:"Usage found in the neighborhood posters.",a:"Local everyday written"},
+  {m:'q2',q:"May occur in local communication among neighbors in everyday, informal and local varieties of languages.",a:"Local everyday oral"},
+  {m:'q2',q:"Usage found in publications and web sites of local societies such as the Baguio Midland Courier.",a:"Local specialized written"},
+  {m:'q2',q:"Involves specialized discourses, e.g., in a computer shop in the neighborhood.",a:"Local specialized oral"},
+  // QUIZ 3
+  {m:'q3',q:"Serves as a basis for developing a critical understanding of the content of mass media.",a:"Key Concepts of Media Literacy framework"},
+  {m:'q3',q:"The term _____ includes any form of written, spoken or media work conveying meaning to an audience.",a:"Text"},
+  {m:'q3',q:"Text may use words, graphics, sounds and images. It may be in oral, print, visual or electronic form.",a:"Text"},
+  {m:'q3',q:"Characteristics of Multimedia Presentations.",a:"Visually oriented\nUse different modalities"},
+  {m:'q3',q:"A 20-slide PowerPoint presentation which moves automatically to each succeeding slide every after 20 seconds.",a:"Pecha Kucha"},
+  {m:'q3',q:"Has become one of the effective ways of communicating and networking among students, professionals, businessmen, public officials, etc.",a:"Blogging"},
+  {m:'q3',q:"Blog is a shorten for ___.",a:"Weblog"},
+  {m:'q3',q:"According to _______, the use of blogs has been an engaging and effective way to promote writing skills of primary students.",a:"Richardson (2006)"},
+  {m:'q3',q:"Involves giving than asking. Receivers pay attention and understand, but not change their behavior.",a:"Informative Communication"},
+  {m:'q3',q:"Is an art of gaining fair and favorable considerations from our point of view.",a:"Persuasive Communication"},
+  {m:'q3',q:"Relies heavily on soundproof and reasoning. The nature of proof has been studied since the Golden Age of Greece.",a:"Argumentative Communication"},
+  {m:'q3',q:"Lucas (2007) says to avoid defective argumentation avoid: Defective evidence and ___.",a:"Defective Patterns of reasoning"},
+  {m:'q3',q:"Types of defective evidence (Lucas, 2007).",a:"Misuse of facts\nStatistical fallacies\nDefective Testimony\nInappropriate evidence"},
+  {m:'q3',q:"A process of speaking in a structured, deliberate manner to inform, influence or entertain the audience.",a:"Public Speaking"},
+  {m:'q3',q:"The term to refer to the body spoken expression of information and ideas.",a:"Speech"},
+  {m:'q3',q:"Appropriate when the speech is long and when details are complicated and essential such as they need to be given completely.",a:"Reading from Manuscript"},
+  {m:'q3',q:"Requires a speaker to commit everything to memory; excellent for short messages.",a:"Memorized"},
+  {m:'q3',q:"May have a long or short preparation. The Speaker may use an outline to guide him.",a:"Extemporaneous Speaking"},
+  {m:'q3',q:"At the spur of the moments; very minimal or no time for preparation.",a:"Impromptu"},
+  {m:'q3',q:"The act of asking questions to get information. Important communication skill used in school, business, and everyday life.",a:"Making inquiries"},
+  {m:'q3',q:"Types of inquiry.",a:"Personal Inquiry\nBusiness Inquiry\nAcademic Inquiry"},
+  {m:'q3',q:"Asking information personally.",a:"Personal Inquiry"},
+  {m:'q3',q:"Asking information related to business or services.",a:"Business Inquiry"},
+  {m:'q3',q:"Asking questions related to school or education.",a:"Academic Inquiry"},
+  {m:'q3',q:"Ways of Making Inquiries.",a:"Letter\nEmail\nPhone Call\nFace-to-Face Conversation"},
+  {m:'q3',q:"Important Parts of an Inquiry.",a:"Greeting\nIntroduction\nPurpose\nQuestions\nClosing"},
+  {m:'q3',q:"The professional way of sharing information to get a job done correctly. About being accurate, organized, and ethical.",a:"Communication for work purposes"},
+  {m:'q3',q:"Handling a 'plethora' or a huge amount of data without getting confused.",a:"Managing Information"},
+  {m:'q3',q:"Organizing details from informants so they can be easily recalled later.",a:"Systematic Recording"},
+  {m:'q3',q:"Writing reports that serve as a permanent record of your work.",a:"Professional Documentation"},
+  {m:'q3',q:"Refer to the first or earliest assessment.",a:"Initial notes"},
+  {m:'q3',q:"Refer to the assessment reports done in order to monitor the condition of the patient.",a:"Interim or progress notes"},
+];
+
+const moduleLabels={q1:'Quiz 1 — Foundations',q2:'Quiz 2 — Intercultural',q3:'Quiz 3 — Media & Speaking'};
+const moduleColors={q1:'var(--teal)',q2:'var(--purple)',q3:'var(--gold)'};
+
+let activeFilters={q1:true,q2:true,q3:true};
+let fcDeck=[],fcIdx=0;
+
+function toggleFilter(m){
+  activeFilters[m]=!activeFilters[m];
+  const btn=document.getElementById('fbtn-'+m);
+  btn.classList.toggle('active-f',activeFilters[m]);
+  initFlashcards();
+}
+function initFlashcards(){
+  fcDeck=allCards.filter(c=>activeFilters[c.m]);
+  fcIdx=0;
+  showCard();
+}
+function showCard(){
+  if(!fcDeck.length){
+    document.getElementById('fcQuestion').textContent='No cards selected.';
+    document.getElementById('fcAnswer').textContent='';
+    document.getElementById('fcProgress').textContent='0 of 0';
+    document.getElementById('fcBar').style.width='0%';
+    return;
+  }
+  document.getElementById('flashcard').classList.remove('flipped');
+  const c=fcDeck[fcIdx];
+  document.getElementById('fcQuestion').textContent=c.q;
+  document.getElementById('fcAnswer').textContent=c.a;
+  const mt=document.getElementById('fcModTag');
+  mt.textContent=c.m.toUpperCase();
+  mt.style.background=moduleColors[c.m]+'22';
+  mt.style.color=moduleColors[c.m];
+  document.getElementById('fcProgress').textContent=`Card ${fcIdx+1} of ${fcDeck.length}`;
+  document.getElementById('fcBar').style.width=((fcIdx+1)/fcDeck.length*100)+'%';
+}
+function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');}
+function nextCard(){if(fcDeck.length){fcIdx=(fcIdx+1)%fcDeck.length;showCard();}}
+function prevCard(){if(fcDeck.length){fcIdx=(fcIdx-1+fcDeck.length)%fcDeck.length;showCard();}}
+function shuffleCards(){
+  for(let i=fcDeck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fcDeck[i],fcDeck[j]]=[fcDeck[j],fcDeck[i]];}
+  fcIdx=0;showCard();
+}
+
+// ===== QUIZ DATA =====
+const allQuestions=[
+  // QUIZ 1
+  {m:'q1',q:"Which component of communication is also known as a barrier or block that prevents effective communication?",opts:["Context","Interference","Feedback","Channel"],ans:1,exp:"Interference is also known as barrier or block that prevents effective communication."},
+  {m:'q1',q:"A yawn or a phone call exemplifies non-verbal and verbal messages, respectively. This is a definition of:",opts:["Feedback","Communication","Channel","Message"],ans:1,exp:"Communication involves verbal and non-verbal expression of thoughts and feelings."},
+  {m:'q1',q:"Thoughts that hamper the message to be interpreted correctly by the receiver are called:",opts:["Physical barriers","Mechanical barriers","Psychological barriers","Linguistic barriers"],ans:2,exp:"Psychological barriers are thoughts that hamper correct interpretation by the receiver."},
+  {m:'q1',q:"Barriers raised by channels employed for inter-personal, group or mass communication are called:",opts:["Physical","Linguistic","Psychological","Mechanical"],ans:3,exp:"Mechanical barriers are raised by the channels employed for communication."},
+  {m:'q1',q:"Which principle of effective communication (Osborn, 2009) forbids fuzzy language, jargons, and doublespeak?",opts:["Concreteness","Courtesy","Clarity","Conciseness"],ans:2,exp:"Clarity makes speeches understandable — fuzzy language, jargons, and doublespeak are forbidden."},
+  {m:'q1',q:"Which Osborn principle requires messages to be supported by facts, statistics, or figures?",opts:["Clarity","Concreteness","Correctness","Consideration"],ans:1,exp:"Concreteness reduces misunderstandings and requires factual support."},
+  {m:'q1',q:"Messages must be geared towards the audience, considering their profession, education, and age. This is:",opts:["Creativity","Courtesy","Captivating","Consideration"],ans:3,exp:"Consideration means gearing messages towards the audience."},
+  {m:'q1',q:"Ethics is a branch of philosophy that focuses on:",opts:["Language structures","Issues of right and wrong in human affairs","Communication components","Cultural barriers"],ans:1,exp:"Ethics focuses on issues of right and wrong in human affairs."},
+  {m:'q1',q:"Krizan (2014) suggests which strategy for effective global communication?",opts:["Use only one language","Avoid cultural interaction","Analyze the message receiver","Reject foreign cultures"],ans:2,exp:"Krizan (2014) says to analyze the message receiver as a strategy."},
+  // QUIZ 2
+  {m:'q2',q:"Intercultural communication as defined by Jandt (1998) refers to:",opts:["Mass media communication","Interaction with people from diverse cultures","Communication within the same culture","Online communication only"],ans:1,exp:"Jandt (1998) defines intercultural communication as interaction with people from diverse cultures."},
+  {m:'q2',q:"Communicating between representatives from different nations is called:",opts:["Interethnic","Interracial","International","Intracultural"],ans:2,exp:"International communication is between representatives from different nations."},
+  {m:'q2',q:"Interacting with members of the same racial or ethnic group or co-culture is called:",opts:["Interracial","Interethnic","International","Intracultural"],ans:3,exp:"Intracultural communication involves members of the same racial or ethnic group."},
+  {m:'q2',q:"A tradition-linked communication system which adheres strongly to being indirect is called:",opts:["Low-context communication","High-context communication","Intracultural communication","Interethnic communication"],ans:1,exp:"High-context communication is tradition-linked and strongly indirect."},
+  {m:'q2',q:"Mahboob (2014) identifies how many domains in which language varies?",opts:["4","6","8","10"],ans:2,exp:"Mahboob (2014) identifies 8 different domains of language variation."},
+  {m:'q2',q:"The three dimensions of the context of communication according to Mahboob are:",opts:["Source, Message, Channel","Field, Tenor, Mode","Input, Process, Output","Culture, Language, Media"],ans:1,exp:"The three dimensions are Field, Tenor, and Mode."},
+  {m:'q2',q:"Usage found in the publications and web sites of local societies like the Baguio Midland Courier is:",opts:["Local everyday oral","Local specialized written","Global everyday written","Local everyday written"],ans:1,exp:"Local specialized written is found in publications of local societies."},
+  {m:'q2',q:"Avoids local colloquialisms to make text accessible to wider communities of readers:",opts:["Local everyday written","Global specialized written","Global everyday written","Local specialized written"],ans:2,exp:"Global everyday written avoids local colloquialisms for wider readership."},
+  // QUIZ 3
+  {m:'q3',q:"Pecha Kucha is described as:",opts:["A 10-slide presentation that advances every 30 seconds","A 20-slide presentation that advances every 20 seconds","A video presentation without slides","An impromptu speech format"],ans:1,exp:"Pecha Kucha is a 20-slide PowerPoint that moves every 20 seconds."},
+  {m:'q3',q:"According to Richardson (2006), blogging is an effective way to promote:",opts:["Public speaking","Writing skills of primary students","Data management","Multimedia design"],ans:1,exp:"Richardson (2006) says blogs promote writing skills, especially with peer feedback."},
+  {m:'q3',q:"Informative Communication involves:",opts:["Changing the receiver's behavior","Gaining fair considerations from your point of view","Giving information where receivers pay attention and understand","Relying on soundproof and reasoning"],ans:2,exp:"Informative Communication involves giving than asking — receivers understand but don't change behavior."},
+  {m:'q3',q:"Argumentative Communication relies heavily on:",opts:["Visual aids and multimedia","Soundproof and reasoning","Emotional appeals only","Repetition and memorization"],ans:1,exp:"Argumentative Communication relies heavily on soundproof and reasoning."},
+  {m:'q3',q:"Lucas (2007) says statistical fallacies and misuse of facts are examples of:",opts:["Defective Patterns of reasoning","Defective evidence","Linguistic interference","Cultural barriers"],ans:1,exp:"Defective evidence includes misuse of facts, statistical fallacies, defective testimony, and inappropriate evidence."},
+  {m:'q3',q:"Using an outline to guide through a speech to achieve better organization is characteristic of:",opts:["Impromptu","Memorized","Reading from Manuscript","Extemporaneous Speaking"],ans:3,exp:"Extemporaneous Speaking may use an outline to guide the speaker."},
+  {m:'q3',q:"Means at the spur of the moments, since there is very minimal or no time for preparation:",opts:["Memorized","Reading from Manuscript","Impromptu","Extemporaneous Speaking"],ans:2,exp:"Impromptu means speaking at the spur of the moment with minimal preparation."},
+  {m:'q3',q:"Asking information related to business or services is called:",opts:["Personal Inquiry","Academic Inquiry","Business Inquiry","Professional Inquiry"],ans:2,exp:"Business Inquiry is asking information related to business or services."},
+  {m:'q3',q:"The professional way of sharing information to get a job done correctly is:",opts:["Managing Information","Communication for work purposes","Systematic Recording","Professional Documentation"],ans:1,exp:"Communication for work purposes is the professional way of sharing information to get a job done."},
+  {m:'q3',q:"Handling a huge amount of data without getting confused is called:",opts:["Professional Documentation","Systematic Recording","Managing Information","Initial notes"],ans:2,exp:"Managing Information is handling a plethora of data without getting confused."},
+  {m:'q3',q:"Refer to the assessment reports done in order to monitor the condition of the patient:",opts:["Initial notes","Final notes","Interim or progress notes","Professional Documentation"],ans:2,exp:"Interim or progress notes are the assessment reports to monitor the patient's condition."},
+];
+
+let activeModules={q1:true,q2:true,q3:true};
+let quizAnswers=[],quizSubmitted=[];
+
+function toggleQuizFilter(m){
+  activeModules[m]=!activeModules[m];
+  const btn=document.getElementById('qfb-'+m);
+  btn.classList.toggle('on',activeModules[m]);
+}
+
+function startQuiz(){
+  const pool=allQuestions.filter(q=>activeModules[q.m]);
+  if(!pool.length){alert('Please select at least one quiz module!');return;}
+  document.getElementById('quiz-intro').style.display='none';
+  quizAnswers=new Array(pool.length).fill(null);
+  quizSubmitted=new Array(pool.length).fill(false);
+  renderQuiz(pool);
+  document.getElementById('quiz-body').style.display='block';
+}
+
+function renderQuiz(pool){
+  const body=document.getElementById('quiz-body');
+  body.innerHTML='';
+  pool.forEach((q,qi)=>{
+    const div=document.createElement('div');
+    div.className='quiz-q'; div.style.animationDelay=(qi*0.04)+'s';
+    const mcolor=moduleColors[q.m];
+    const mlabel=moduleLabels[q.m];
+    div.innerHTML=`<div class="quiz-q-module" style="color:${mcolor}">${mlabel}</div><div class="quiz-q-text">${qi+1}. ${q.q}</div>`;
+    q.opts.forEach((opt,oi)=>{
+      const btn=document.createElement('button');
+      btn.className='quiz-opt'; btn.textContent=opt;
+      btn.onclick=()=>answerQ(qi,oi,q,div); div.appendChild(btn);
+    });
+    const fb=document.createElement('div'); fb.id=`fb-${qi}`; div.appendChild(fb);
+    body.appendChild(div);
+  });
+  const sb=document.createElement('div');
+  sb.style.cssText='text-align:center;margin-top:1.5rem;';
+  sb.innerHTML=`<button class="btn btn-gold" onclick="showScore(${pool.length})">Submit All &amp; See Score</button>`;
+  body.appendChild(sb);
+}
+
+function answerQ(qi,oi,q,qDiv){
+  if(quizSubmitted[qi]) return;
+  quizSubmitted[qi]=true; quizAnswers[qi]=oi;
+  qDiv.querySelectorAll('.quiz-opt').forEach((btn,idx)=>{
+    if(idx===q.ans) btn.classList.add('correct');
+    else if(idx===oi&&oi!==q.ans) btn.classList.add('wrong');
+    else btn.classList.add('disabled');
+  });
+  const fb=document.getElementById(`fb-${qi}`);
+  fb.className='quiz-feedback '+(oi===q.ans?'ok':'bad');
+  fb.textContent=(oi===q.ans?'✓ Correct! ':'✗ Incorrect. ')+q.exp;
+}
+
+function showScore(total){
+  const pool=allQuestions.filter(q=>activeModules[q.m]);
+  const correct=quizAnswers.filter((a,i)=>a!==null&&a===pool[i]?.ans).length;
+  const pct=Math.round(correct/total*100);
+  const msg=pct>=80?"Excellent! You're ready! 🎉":pct>=60?"Good effort — review the tricky ones.":"Keep reviewing — you've got this! 💪";
+  const sd=document.createElement('div'); sd.className='quiz-score';
+  sd.innerHTML=`<h2>Quiz Complete!</h2><span class="big-score">${correct}/${total}</span><p>${pct}% · ${msg}</p><br><br><button class="btn btn-gold" onclick="restartQuiz()">Try Again</button>`;
+  document.getElementById('quiz-body').appendChild(sd);
+  sd.scrollIntoView({behavior:'smooth'});
+}
+
+function restartQuiz(){
+  document.getElementById('quiz-body').style.display='none';
+  document.getElementById('quiz-body').innerHTML='';
+  document.getElementById('quiz-intro').style.display='block';
+}
+
+// Init flashcards on load
+initFlashcards();
+</script>
+</body>
+</html>
